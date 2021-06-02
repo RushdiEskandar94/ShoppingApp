@@ -1,8 +1,10 @@
+import 'package:shoppingapp/models/product_size.dart';
+
 class Product {
   int? productId;
-  String productName = "";
-  String productShortDescription= "";
-  String productDescription= "";
+  String? productName = "";
+  String? productShortDescription= "";
+  String? productDescription= "";
   double? productOldPrice;
   double? productNewPrice;
   bool? productIsSale;
@@ -19,28 +21,28 @@ class Product {
   // List<Null> productJacketModels;
   // List<Null> productPatterns;
   // List<Null> productSizes;
-
+  List<ProductSizes>? productSizes;
   Product(
-      { required this.productId,
-        required this.productName,
-        required this.productShortDescription,
-        required this.productDescription,
-        required this.productOldPrice,
-        required this.productNewPrice,
-        required this.productIsSale,
-        required this.productSaleText,
-        required this.productSubText,
-        required this.productOrderNumber,
-        required this.productCreateDate,
-        required this.productCode,
-        required this.subCategoryId,
+      { this.productId,
+        this.productName,
+        this.productShortDescription,
+        this.productDescription,
+        this.productOldPrice,
+        this.productNewPrice,
+        this.productIsSale,
+        this.productSaleText,
+        this.productSubText,
+        this.productOrderNumber,
+        this.productCreateDate,
+        this.productCode,
+        this.subCategoryId,
         // required this.subCategory,
         // required this.productColours,
         // required this.productFabrics,
-        required this.productImages,
+        this.productImages,
         // required this.productJacketModels,
         // required this.productPatterns,
-        // required this.productSizes
+        this.productSizes
      });
 
   Product.fromJson(Map<String, dynamic> json) {
@@ -88,12 +90,12 @@ class Product {
     //     productPatterns.add(new Null.fromJson(v));
     //   });
     // }
-    // if (json['productSizes'] != null) {
-    //   productSizes = <Null>[];
-    //   json['productSizes'].forEach((v) {
-    //     productSizes.add(new Null.fromJson(v));
-    //   });
-    // }
+    if (json['productSizes'] != null) {
+      productSizes = <ProductSizes>[];
+      json['productSizes'].forEach((v) {
+        productSizes!.add(ProductSizes.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {

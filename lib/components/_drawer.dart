@@ -47,7 +47,7 @@ class MyDrawer extends ConsumerWidget {
           loading: () => Center(
                 child: CircularProgressIndicator(),
               ),
-          error: (context, error) => Center(
+          error: (error,context) => Center(
                 child: Text("$error"),
               )),
     );
@@ -59,9 +59,13 @@ class MyDrawer extends ConsumerWidget {
       list.add(GestureDetector(
         child: Padding(
           padding: const EdgeInsets.all(8),
-          child: Text("${e.subCategoryName}"),
+          child: Flexible(
+              child: Text(
+            "${e.subCategoryName}",
+            overflow: TextOverflow.ellipsis,
+          )),
         ),
-        onTap: (){
+        onTap: () {
           context.read(subCateSelected).state = e;
           Navigator.of(context).pushNamed('/productList');
         },

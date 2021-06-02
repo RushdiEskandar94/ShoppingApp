@@ -32,6 +32,7 @@ dependencies:
   carousel_slider: ^3.0.0
   flutter_riverpod: any
   page_transition: any
+  auto_size_text: any
 
 dev_dependencies:
   flutter_test:

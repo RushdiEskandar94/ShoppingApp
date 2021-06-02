@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shoppingapp/models/category.dart';
+import 'package:shoppingapp/screens/product_details.dart';
 import 'package:shoppingapp/screens/product_list_screen.dart';
 
 import 'networking/api_request.dart';
@@ -24,6 +24,12 @@ class MyApp extends StatelessWidget {
           case '/productList':
             return PageTransition(
                 child: ProductListPage(),
+                type: PageTransitionType.fade,
+                settings: settings);
+            break;
+          case '/productDetails':
+            return PageTransition(
+                child: ProductDetails(),
                 type: PageTransitionType.fade,
                 settings: settings);
             break;
@@ -52,9 +58,9 @@ class MyHomePage extends ConsumerWidget {
   });
 
   // ignore: top_level_function_literal_block
-  final _fetchCategories = FutureProvider((ref) async {
-    return await fetchCategories();
-  });
+  // final _fetchCategories = FutureProvider((ref) async {
+  //   return await fetchCategories();
+  // });
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
