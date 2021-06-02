@@ -6,7 +6,7 @@ class ProductSizes {
   int? number;
   MySize? mySize;
 
-  ProductSizes({required this.sizeId,required this.productId,required this.number,required this.mySize});
+  ProductSizes({this.sizeId, this.productId,this.number, this.mySize});
 
   ProductSizes.fromJson(Map<String, dynamic> json) {
     sizeId = json['sizeId'];

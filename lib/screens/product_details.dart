@@ -20,6 +20,7 @@ class ProductDetails extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     var productDetailsApiResult = watch(fetchProductDetails(
         context.read(productSelected).state!.productId as int));
+    var _productSizeSelected = watch(productSizeSelected).state; // listen to change to re-render
     return Scaffold(
       body: SafeArea(
         child: Expanded(
@@ -115,14 +116,21 @@ class ProductDetails extends ConsumerWidget {
                             ? Wrap(
                                 children:
                                     (product.productSizes as List<ProductSizes>)
-                                        .map((size) => SizeWidget(
-                                            SizeModel(
-                                                isSelected: false,
-                                                text: size.mySize!.sizeName),
-                                            size))
+                                        .map((size) => GestureDetector(
+                                              onTap: size.number! > 0 ? () {
+                                                 // if product sizes number > 0
+                                                context.read(productSizeSelected).state = size;
+                                              }:null,
+                                              child: SizeWidget(
+                                                  SizeModel(
+                                                      isSelected: _productSizeSelected.mySize == size.mySize,
+                                                      productSizes: size),
+                                                  size),
+                                            ))
                                         .toList(),
                               )
                             : Container(),
+                        // text warning
                         // button add to bag
                         Column(
                           children: [
@@ -155,7 +163,9 @@ class ProductDetails extends ConsumerWidget {
                                       onPressed: () {},
                                     ),
                                   ),
-                                  SizedBox(width: 12,),
+                                  SizedBox(
+                                    width: 12,
+                                  ),
                                   Expanded(
                                     child: ElevatedButton(
                                       style: ButtonStyle(
@@ -168,8 +178,25 @@ class ProductDetails extends ConsumerWidget {
                                   )
                                 ],
                               ),
-                            )
+                            ),
                           ],
+                        ),
+                        // product further details
+                        Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "Further details",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  decoration: TextDecoration.underline),
+                              textAlign: TextAlign.justify,
+                            )),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "${product.productDescription}",
+                            textAlign: TextAlign.justify,
+                          ),
                         )
                       ],
                     ),

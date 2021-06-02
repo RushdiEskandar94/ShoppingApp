@@ -32,11 +32,17 @@ class MyDrawer extends ConsumerWidget {
                             width: 30,
                           ),
                           categories[i].categoryName!.length <= 10
-                              ? Text("${categories[i].categoryName}")
-                              : Text(
+                              ? Flexible(
+                                  child: Text(
                                   "${categories[i].categoryName}",
+                                  overflow: TextOverflow.ellipsis,
+                                ))
+                              : Flexible(
+                                  child: Text(
+                                  "${categories[i].categoryName}",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(fontSize: 12),
-                                )
+                                ))
                         ],
                       ),
                       children: _buildList(categories[i], context),
@@ -47,7 +53,7 @@ class MyDrawer extends ConsumerWidget {
           loading: () => Center(
                 child: CircularProgressIndicator(),
               ),
-          error: (error,context) => Center(
+          error: (error, context) => Center(
                 child: Text("$error"),
               )),
     );

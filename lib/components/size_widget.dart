@@ -19,15 +19,15 @@ class SizeWidget extends StatelessWidget {
       height: 50,
       child: Center(
         child: Text(
-          sizeModel.text as String,
+          sizeModel.productSizes.mySize!.sizeName,
           style: TextStyle(
-            color: sizeModel.isSelected ? Colors.white : Colors.black,
+            color:sizeModel.productSizes.number == 0 ? Colors.grey : sizeModel.isSelected ? Colors.white : Colors.black,
             fontSize: 18,
           ),
         ),
       ),
       decoration: BoxDecoration(
-        color: sizeModel.isSelected ? Colors.black : Colors.transparent,
+        color: sizeModel.productSizes.number == 0 ? Colors.grey : sizeModel.isSelected ? Colors.black : Colors.transparent,
         border: Border.all(
             width: 1.0,
             color: sizeModel.isSelected ? Colors.black:Colors.grey,
@@ -40,7 +40,7 @@ class SizeWidget extends StatelessWidget {
 
 class SizeModel {
   bool isSelected;
-  String? text = "";
+  final ProductSizes productSizes;
 
-  SizeModel({required this.isSelected, required this.text});
+  SizeModel({required this.isSelected, required this.productSizes});
 }
